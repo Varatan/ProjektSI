@@ -1,22 +1,23 @@
 <?php
 /**
- * Task entity.
+ * Report entity.
  */
 
 namespace App\Entity;
 
-use App\Repository\TaskRepository;
+use App\Repository\ReportRepository;
 use DateTimeImmutable;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Task.
+ * Class Report.
  *
  * @psalm-suppress MissingConstructor
  */
-#[ORM\Entity(repositoryClass: TaskRepository::class)]
-#[ORM\Table(name: 'tasks')]
-class Task
+#[ORM\Entity(repositoryClass: ReportRepository::class)]
+#[ORM\Table(name: 'reports')]
+class Report
 {
     /**
      * Primary key.
@@ -61,9 +62,12 @@ class Task
      *
      * @var Category
      */
-    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\ManyToOne(targetEntity: Category::class, fetch: "EXTRA_LAZY")]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $content = null;
 
     /**
      * Getter for Id.
@@ -143,6 +147,18 @@ class Task
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Task fixtures.
+ * Report fixtures.
  */
 
 namespace App\DataFixtures;
@@ -8,15 +8,15 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use App\Entity\Enum\TaskStatus;
 use App\Entity\Tag;
-use App\Entity\Task;
+use App\Entity\Report;
 use App\Entity\User;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
- * Class TaskFixtures.
+ * Class ReportFixtures.
  */
-class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
+class ReportFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.
@@ -31,24 +31,25 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             return;
         }
 
-        $this->createMany(100, 'tasks', function (int $i) {
-            $task = new Task();
-            $task->setTitle($this->faker->sentence);
-            $task->setCreatedAt(
+        $this->createMany(100, 'reports', function (int $i) {
+            $report = new Report();
+            $report->setTitle($this->faker->sentence);
+            $report->setContent($this->faker->sentence);
+            $report->setCreatedAt(
                 DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
-            $task->setUpdatedAt(
+            $report->setUpdatedAt(
                 DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             /** @var Category $category */
             $category = $this->getRandomReference('categories');
-            $task->setCategory($category);
+            $report->setCategory($category);
 
-            return $task;
+            return $report;
         });
 
         $this->manager->flush();
