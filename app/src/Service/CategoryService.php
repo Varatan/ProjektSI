@@ -50,6 +50,20 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
+     * @param Category $category
+     * @return void
+     */
+    public function delete(Category $category): bool
+    {
+        if($this->canBeDeleted($category)){
+            $this->categoryRepository->delete($category);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
 
     Can Category be deleted?*
     @param Category $category Category entity*
