@@ -6,14 +6,17 @@
 namespace App\Controller;
 
 use App\Entity\Report;
+use App\Form\Type\ReportType;
 use App\Repository\ReportRepository;
 use App\Service\ReportService;
 use App\Service\ReportServiceInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class ReportController.
@@ -22,22 +25,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReportController extends AbstractController
 {
     /**
-     * Task service.
+     * Report service.
      */
     private ReportServiceInterface $reportService;
 
     /**
+     * Translator.
+     */
+    private TranslatorInterface $translator;
+
+    /**
      * Constructor.
      */
-    public function __construct(ReportServiceInterface $taskService)
+    public function __construct(ReportServiceInterface $reportService, TranslatorInterface $translator)
     {
-        $this->reportService = $taskService;
+        $this->reportService = $reportService;
+        $this->translator = $translator;
     }
 
     /**
      * Index action.
      *
-     * @param Request            $request        HTTP Request
+     * @param Request $request HTTP Request
      *
      * @return Response HTTP response
      */
@@ -54,8 +63,8 @@ class ReportController extends AbstractController
     /**
      * Show action.
      *
-     * @param ReportRepository $reportRepository
-     * @param int $id
+     * @param Report $report Report entity
+     *
      * @return Response HTTP response
      */
     #[Route(
@@ -64,13 +73,124 @@ class ReportController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET',
     )]
-    public function show(ReportRepository $reportRepository, int $id): Response
+    public function show(Report $report): Response
     {
-        $report = $reportRepository->find($id);
-
         return $this->render(
             'report/show.html.twig',
             ['report' => $report]
+        );
+    }
+
+    /**
+     * Create action.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/create', name: 'report_create', methods: 'GET|POST', )]
+    public function create(Request $request): Response
+    {
+        $report = new Report();
+        $form = $this->createForm(
+            ReportType::class,
+            $report,
+            ['action' => $this->generateUrl('report_create')]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->reportService->save($report);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.created_successfully')
+            );
+
+            return $this->redirectToRoute('report_index');
+        }
+
+        return $this->render('report/create.html.twig',  ['form' => $form->createView()]);
+    }
+
+    /**
+     * Edit action.
+     *
+     * @param Request $request HTTP request
+     * @param Report $report Report entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/{id}/edit', name: 'report_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    public function edit(Request $request, Report $report): Response
+    {
+        $form = $this->createForm(
+            ReportType::class,
+            $report,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('report_edit', ['id' => $report->getId()]),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->reportService->save($report);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.edited_successfully')
+            );
+
+            return $this->redirectToRoute('report_index');
+        }
+
+        return $this->render(
+            'report/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'report' => $report,
+            ]
+        );
+    }
+    /**
+     * Delete action.
+     *
+     * @param Request $request HTTP request
+     * @param Report $report Report entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/{id}/delete', name: 'report_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    public function delete(Request $request, Report $report): Response
+    {
+        $form = $this->createForm(
+            FormType::class,
+            $report,
+            [
+                'method' => 'DELETE',
+                'action' => $this->generateUrl('report_delete', ['id' => $report->getId()]),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->reportService->delete($report);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.deleted_successfully')
+            );
+
+            return $this->redirectToRoute('report_index');
+        }
+
+        return $this->render(
+            'report/delete.html.twig',
+            [
+                'form' => $form->createView(),
+                'report' => $report,
+            ]
         );
     }
 }

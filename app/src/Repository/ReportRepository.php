@@ -10,6 +10,8 @@ use App\Entity\Report;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
 /**
  * Class ReportRepository.
@@ -69,7 +71,9 @@ class ReportRepository extends ServiceEntityRepository
     @throws NoResultException
     @throws NonUniqueResultException
      */
-    public function countByCategory(Category $category): int{$qb = $this->getOrCreateQueryBuilder();
+    public function countByCategory(Category $category): int
+    {
+        $qb = $this->getOrCreateQueryBuilder();
 
         return $qb->select($qb->expr()->countDistinct('report.id'))
             ->where('report.category = :category')
@@ -77,6 +81,29 @@ class ReportRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    /**
+     * Save entity.
+     *
+     * @param Report $task Task entity
+     */
+    public function save(Report $report): void
+    {
+        $this->_em->persist($report);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Report $report Task entity
+     */
+    public function delete(Report $report): void
+    {
+        $this->_em->remove($report);
+        $this->_em->flush();
+    }
+
     /**
      * Get or create new query builder.
      *

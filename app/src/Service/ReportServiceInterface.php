@@ -22,4 +22,18 @@ interface ReportServiceInterface
      */
     public function getPaginatedList(int $page): PaginationInterface;
 
+    /**
+     * Save entity.
+     *
+     * @param Report $report Task entity
+     */
+    public function save(Report $report): void;
+
+    /**
+     * Delete entity.
+     *
+     * @param Report $report Task entity
+     */
+    public function delete(Report $report): void;
+
 }
