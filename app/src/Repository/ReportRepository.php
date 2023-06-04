@@ -7,6 +7,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use App\Entity\Report;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -63,6 +64,24 @@ class ReportRepository extends ServiceEntityRepository
             ->join('report.category','category')
             ->orderBy('report.createdAt', 'DESC');
     }
+
+    /**
+     * Query reports by author.
+     *
+     * @param User $user User entity
+     *
+     * @return QueryBuilder Query builder
+     */
+    public function queryByAuthor(User $user): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll();
+
+        $queryBuilder->andWhere('report.author = :author')
+            ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
+
     /**
 
     Count reports by category.*

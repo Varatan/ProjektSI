@@ -6,7 +6,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Enum\TaskStatus;
+use App\Entity\Enum\ReportStatus;
 use App\Entity\Tag;
 use App\Entity\Report;
 use App\Entity\User;
@@ -49,6 +49,10 @@ class ReportFixtures extends AbstractBaseFixtures implements DependentFixtureInt
             $category = $this->getRandomReference('categories');
             $report->setCategory($category);
 
+            /** @var User $author */
+            $author = $this->getRandomReference('users');
+            $report->setAuthor($author);
+
             return $report;
         });
 
@@ -61,10 +65,10 @@ class ReportFixtures extends AbstractBaseFixtures implements DependentFixtureInt
      *
      * @return string[] of dependencies
      *
-     * @psalm-return array{0: CategoryFixtures::class}
+     * @psalm-return array{0: CategoryFixtures::class, 1:UserFixtures::class}
      */
     public function getDependencies(): array
     {
-        return [CategoryFixtures::class];
+        return [CategoryFixtures::class, UserFixtures::class];
     }
 }

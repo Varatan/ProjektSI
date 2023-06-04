@@ -6,6 +6,7 @@
 namespace App\Service;
 
 use App\Entity\Report;
+use App\Entity\User;
 use App\Repository\ReportRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -40,14 +41,15 @@ class ReportService implements ReportServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int  $page   Page number
+     * @param User $author Author
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface
+    public function getPaginatedList(int $page, User $author): PaginationInterface
     {
         return $this->paginator->paginate(
-            $this->reportRepository->queryAll(),
+            $this->reportRepository->queryByAuthor($author),
             $page,
             ReportRepository::PAGINATOR_ITEMS_PER_PAGE
         );

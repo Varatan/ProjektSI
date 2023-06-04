@@ -20,6 +20,8 @@
             <dd>{{  report.content }}</dd>
             <dt>{{ 'label.category'|trans }}</dt>
             <dd>{{  report.category.title }}</dd>
+            <dt>{{ 'label.author'|trans }}</dt>
+            <dd>{{  report.author.username }}</dd>
         </dl>
         <p>
             <a href="{{ url('report_index') }}" title="{{ 'action.back_to_list'|trans }}">
