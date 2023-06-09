@@ -103,6 +103,11 @@ class Report
     #[Assert\Type(User::class)]
     private ?User $author = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank]
+    private ?Status $status = null;
+
     /**
      * Getter for Id.
      *
@@ -217,6 +222,18 @@ class Report
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

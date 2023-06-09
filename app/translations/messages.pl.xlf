@@ -52,7 +52,15 @@
       </trans-unit>
       <trans-unit id="action.show">
         <source>action.show</source>
-        <target>Show</target>
+        <target>Pokaż</target>
+      </trans-unit>
+      <trans-unit id="action.edit">
+        <source>action.edit</source>
+        <target>Edytuj</target>
+      </trans-unit>
+      <trans-unit id="action.delete">
+        <source>action.delete</source>
+        <target>Usuń</target>
       </trans-unit>
       <trans-unit id="action.back_to_list">
         <source>action.back_to_list</source>

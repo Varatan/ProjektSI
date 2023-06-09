@@ -7,6 +7,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use App\Entity\Enum\ReportStatus;
+use App\Entity\Status;
 use App\Entity\Tag;
 use App\Entity\Report;
 use App\Entity\User;
@@ -45,6 +46,12 @@ class ReportFixtures extends AbstractBaseFixtures implements DependentFixtureInt
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
+
+            /** @var Status $status */
+            $status = $this->getRandomReference('statuses');
+            $report->setStatus($status);
+
+
             /** @var Category $category */
             $category = $this->getRandomReference('categories');
             $report->setCategory($category);

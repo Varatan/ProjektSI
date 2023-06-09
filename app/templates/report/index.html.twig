@@ -17,6 +17,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'report.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'report.title') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.content'|trans, 'report.content') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.status'|trans, 'report.status.title') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.author'|trans, 'report.author.username') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.category'|trans, 'category.title') }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
@@ -30,11 +31,19 @@
                     <td>{{ report.updatedAt|format_date('long') }}</td>
                     <td>{{ report.title }}</td>
                     <td>{{ report.content }}</td>
+                    <td>{{ report.status.title }}</td>
                     <td>{{ report.author.username }}</td>
                     <td>{{ report.category.title }}</td>
                     <td>
-                        <a href="{{ url('report_show', {id: report.id}) }}" title="{{ 'action.show'|trans }}">
+                        <a class="btn btn-outline-primary" href="{{ url('report_show', {id: report.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
+                        </a>
+
+                        <a class="btn btn-outline-success" href="{{ url('report_edit', {id: report.id}) }}" title="{{ 'action.edit'|trans }}">
+                            {{ 'action.edit'|trans }}
+                        </a>
+                        <a class="btn btn-outline-danger" href="{{ url('report_delete', {id: report.id}) }}" title="{{ 'action.delete'|trans }}">
+                            {{ 'action.delete'|trans }}
                         </a>
                     </td>
                 </tr>

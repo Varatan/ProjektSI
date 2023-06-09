@@ -88,7 +88,7 @@ class ReportController extends AbstractController
 
         return $this->render(
             'report/show.html.twig',
-            ['task' => $report]
+            ['report' => $report]
         );
     }
 
