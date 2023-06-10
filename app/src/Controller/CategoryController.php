@@ -9,6 +9,7 @@ use App\Entity\Category;
 use App\Form\Type\CategoryType;
 use App\Service\CategoryServiceInterface;
 use App\Repository\CategoryRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * Class CategoryController.
  */
 #[Route('/category')]
+#[IsGranted('MANAGE')]
 class CategoryController extends AbstractController
 {
     /**
@@ -51,6 +53,7 @@ class CategoryController extends AbstractController
      * @return Response HTTP response
      */
     #[Route(name: 'category_index', methods: 'GET')]
+    //#[IsGranted('MANAGE')]
     public function index(Request $request): Response
     {
         $pagination = $this->categoryService->getPaginatedList(
@@ -63,8 +66,7 @@ class CategoryController extends AbstractController
     /**
      * Show action.
      *
-     * @param CategoryRepository $categoryRepository
-     * @param int $id
+     * @param Category $category
      * @return Response HTTP response
      */
     #[Route(
@@ -73,10 +75,13 @@ class CategoryController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET'
     )]
-    public function show(CategoryRepository $categoryRepository, int $id): Response
+    //#[IsGranted('VIEW', subject: 'category')]
+    public function show(Category $category): Response
     {
-        $category = $categoryRepository->find($id);
-        return $this->render('category/show.html.twig', ['category' => $category]);
+        return $this->render(
+            'category/show.html.twig',
+            ['category' => $category]
+        );
     }
 
     /**
@@ -91,6 +96,7 @@ class CategoryController extends AbstractController
         name: 'category_create',
         methods: 'GET|POST',
     )]
+    //#[IsGranted('MANAGE')]
     public function create(Request $request): Response
     {
         $category = new Category();
@@ -123,6 +129,7 @@ class CategoryController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'category_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    //#[IsGranted('EDIT', subject: 'category')]
     public function edit(Request $request, Category $category): Response
     {
         $form = $this->createForm(
@@ -166,6 +173,7 @@ class CategoryController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'category_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    //#[IsGranted('DELETE', subject: 'category')]
     public function delete(Request $request, Category $category): Response
     {
         $form = $this->createForm(FormType::class, $category, [

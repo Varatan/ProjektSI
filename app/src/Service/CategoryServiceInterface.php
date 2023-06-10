@@ -40,4 +40,6 @@ interface CategoryServiceInterface
      * @return PaginationInterface<string, mixed> Paginated list
      */
     public function getPaginatedList(int $page): PaginationInterface;
+
+    public function findOneById(int $id): ?Category;
 }

@@ -12,6 +12,7 @@ use App\Repository\ReportRepository;
 use App\Service\ReportService;
 use App\Service\ReportServiceInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,9 +55,13 @@ class ReportController extends AbstractController
     #[Route(name: 'report_index', methods: 'GET')]
     public function index(Request $request): Response
     {
+        $filters = $this->getFilters($request);
+        /** @var User $user */
+        $user = $this->getUser();
         $pagination = $this->reportService->getPaginatedList(
             $request->query->getInt('page', 1),
-            $this->getUser()
+            $user,
+            $filters
         );
 
         return $this->render('report/index.html.twig', ['pagination' => $pagination]);
@@ -75,17 +80,9 @@ class ReportController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET',
     )]
+    #[IsGranted('VIEW', subject: 'report')]
     public function show(Report $report): Response
     {
-        if ($report->getAuthor() !== $this->getUser()) {
-            $this->addFlash(
-                'warning',
-                $this->translator->trans('message.record_not_found')
-            );
-
-            return $this->redirectToRoute('report_index');
-        }
-
         return $this->render(
             'report/show.html.twig',
             ['report' => $report]
@@ -136,6 +133,7 @@ class ReportController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'report_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    #[IsGranted('EDIT', subject: 'report')]
     public function edit(Request $request, Report $report): Response
     {
         $form = $this->createForm(
@@ -176,6 +174,7 @@ class ReportController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'report_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    #[IsGranted('DELETE', subject: 'report')]
     public function delete(Request $request, Report $report): Response
     {
         $form = $this->createForm(
@@ -206,5 +205,23 @@ class ReportController extends AbstractController
                 'report' => $report,
             ]
         );
+    }
+
+    /**
+     * Get filters from request.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return array<string, int> Array of filters
+     *
+     * @psalm-return array{category_id: int, tag_id: int, status_id: int}
+     */
+    private function getFilters(Request $request): array
+    {
+        $filters = [];
+        $filters['category_id'] = $request->query->getInt('filters_category_id');
+        $filters['tag_id'] = $request->query->getInt('filters_tag_id');
+
+        return $filters;
     }
 }

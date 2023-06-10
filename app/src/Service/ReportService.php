@@ -10,6 +10,7 @@ use App\Entity\User;
 use App\Repository\ReportRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Class ReportService.
@@ -22,6 +23,13 @@ class ReportService implements ReportServiceInterface
     private ReportRepository $reportRepository;
 
     /**
+     * Category service.
+     */
+    private CategoryServiceInterface $categoryService;
+
+    private $security;
+
+    /**
      * Paginator.
      */
     private PaginatorInterface $paginator;
@@ -32,10 +40,32 @@ class ReportService implements ReportServiceInterface
      * @param ReportRepository     $reportRepository Report repository
      * @param PaginatorInterface $paginator      Paginator
      */
-    public function __construct(ReportRepository $reportRepository, PaginatorInterface $paginator)
+    public function __construct(ReportRepository $reportRepository, PaginatorInterface $paginator, Security $security, CategoryServiceInterface $categoryService,)
     {
         $this->reportRepository = $reportRepository;
         $this->paginator = $paginator;
+        $this->security = $security;
+        $this->categoryService = $categoryService;
+    }
+
+    /**
+     * Prepare filters for the tasks list.
+     *
+     * @param array<string, int> $filters Raw filters from request
+     *
+     * @return array<string, object> Result array of filters
+     */
+    private function prepareFilters(array $filters): array
+    {
+        $resultFilters = [];
+        if (!empty($filters['category_id'])) {
+            $category = $this->categoryService->findOneById($filters['category_id']);
+            if (null !== $category) {
+                $resultFilters['category'] = $category;
+            }
+        }
+
+        return $resultFilters;
     }
 
     /**
@@ -46,13 +76,23 @@ class ReportService implements ReportServiceInterface
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page, User $author): PaginationInterface
+    public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
     {
-        return $this->paginator->paginate(
-            $this->reportRepository->queryByAuthor($author),
-            $page,
-            ReportRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
+        $filters = $this->prepareFilters($filters);
+        if($this->security->isGranted('ROLE_ADMIN')){
+            return $this->paginator->paginate(
+              $this->reportRepository->queryAll($filters),
+              $page,
+                ReportRepository::PAGINATOR_ITEMS_PER_PAGE
+            );
+        }else{
+            return $this->paginator->paginate(
+                $this->reportRepository->queryByAuthor($author,$filters),
+                $page,
+                ReportRepository::PAGINATOR_ITEMS_PER_PAGE
+            );
+        }
+
     }
 
     /**

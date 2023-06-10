@@ -54,30 +54,52 @@ class ReportRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder Query builder
      */
-    public function queryAll(): QueryBuilder
+    public function queryAll(array $filters): QueryBuilder
     {
-        return $this->getOrCreateQueryBuilder()
+        $queryBuilder =  $this->getOrCreateQueryBuilder()
             ->select(
                 'partial report.{id, createdAt, updatedAt, title, content}',
                 'partial category.{id, title}'
             )
             ->join('report.category','category')
             ->orderBy('report.createdAt', 'DESC');
+
+
+        return $this->applyFiltersToList($queryBuilder, $filters);
     }
 
     /**
      * Query reports by author.
      *
      * @param User $user User entity
+     * @param array<string, object> $filters Filters
      *
      * @return QueryBuilder Query builder
      */
-    public function queryByAuthor(User $user): QueryBuilder
+    public function queryByAuthor(User $user, array $filters = []): QueryBuilder
     {
-        $queryBuilder = $this->queryAll();
+        $queryBuilder = $this->queryAll($filters);
 
         $queryBuilder->andWhere('report.author = :author')
             ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
+
+    /**
+     * Apply filters to paginated list.
+     *
+     * @param QueryBuilder          $queryBuilder Query builder
+     * @param array<string, object> $filters      Filters array
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
+    {
+        if (isset($filters['category']) && $filters['category'] instanceof Category) {
+            $queryBuilder->andWhere('category = :category')
+                ->setParameter('category', $filters['category']);
+        }
 
         return $queryBuilder;
     }
