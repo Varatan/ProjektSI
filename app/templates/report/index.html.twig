@@ -7,8 +7,6 @@
 {% block body %}
     <h1>{{ 'title.report_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
-
-
         <table class="table table-striped">
             <thead>
             <tr>
@@ -34,7 +32,7 @@
                     <td>{{ report.status.title }}</td>
                     <td>{{ report.author.username }}</td>
                     <td>
-                        <a href="{{ url('report_index', {'filters.category_id' : report.category.id}) }}" title="{{ report.category.title }}">
+                        <a class = "btn btn-primary" href="{{ url('report_index', {'filters.category_id' : report.category.id}) }}" title="{{ report.category.title }}">
                             {{ report.category.title }}
                         </a>
                     </td>

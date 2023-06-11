@@ -124,6 +124,25 @@ class ReportRepository extends ServiceEntityRepository
     }
 
     /**
+
+    Count reports by category.*
+    @param Category $category Category*
+    @return int Number of reports in category*
+    @throws NoResultException
+    @throws NonUniqueResultException
+     */
+    public function countByUser(User $user): int
+    {
+        $qb = $this->getOrCreateQueryBuilder();
+
+        return $qb->select($qb->expr()->countDistinct('report.id'))
+            ->where('report.author = :user')
+            ->setParameter(':user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
      * Save entity.
      *
      * @param Report $task Task entity

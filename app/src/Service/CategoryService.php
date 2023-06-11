@@ -27,6 +27,7 @@ class CategoryService implements CategoryServiceInterface
     /**
      * @param CategoryRepository $categoryRepository
      * @param ReportRepository $reportRepository
+     * @param PaginatorInterface $paginator
      */
     public function __construct(CategoryRepository $categoryRepository, ReportRepository $reportRepository,  PaginatorInterface $paginator)
     {
@@ -51,7 +52,7 @@ class CategoryService implements CategoryServiceInterface
 
     /**
      * @param Category $category
-     * @return void
+     * @return bool
      */
     public function delete(Category $category): bool
     {
@@ -88,7 +89,7 @@ class CategoryService implements CategoryServiceInterface
         return $this->paginator->paginate(
             $this->categoryRepository->queryAll(),
             $page,
-            ReportRepository::PAGINATOR_ITEMS_PER_PAGE
+            CategoryRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
 
@@ -99,7 +100,6 @@ class CategoryService implements CategoryServiceInterface
      *
      * @return Category|null Category entity
      *
-     * @throws NonUniqueResultException
      */
     public function findOneById(int $id): ?Category
     {

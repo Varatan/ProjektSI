@@ -16,7 +16,7 @@
     <div class="row bg-info">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <div class="col-8 d-flex flex-row">
-            <h1>Report app</h1>
+            <a href="{{ url('report_index') }}"><h1>Report app</h1></a>
             <div class="p-2">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="reportButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,6 +39,19 @@
                         <li><a class="dropdown-item" href={{ url('category_create') }}>{{ 'nav_create'|trans }}</a></li>
                     </ul>
                 </div>
+                {% endif %}
+            </div>
+            <div class="p-2">
+                {% if is_granted('MANAGE') %}
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ 'nav_users'|trans }}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="categoryButton">
+                            <li><a class="dropdown-item" href={{ url('user_index') }}>{{ 'nav_index'|trans }}</a></li>
+                            <li><a class="dropdown-item" href={{ url('user_create') }}>{{ 'nav_create'|trans }}</a></li>
+                        </ul>
+                    </div>
                 {% endif %}
             </div>
         </div>

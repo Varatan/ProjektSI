@@ -1,20 +1,22 @@
 <?php
 /**
- * Category type.
+ * User type.
  */
 
 namespace App\Form\Type;
 
-use App\Entity\Category;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class CategoryType.
+ * Class UserType.
  */
-class CategoryType extends AbstractType
+class UserType extends AbstractType
 {
     /**
      * Builds the form.
@@ -30,12 +32,28 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
-            'title',
+            'username',
             TextType::class,
             [
-                'label' => 'label.title',
+                'label' => 'label.username',
                 'required' => true,
-                'attr' => ['max_length' => 255],
+                'attr' => ['max_length' => 180],
+            ]);
+        $builder->add(
+            'email',
+            EmailType::class,
+            [
+                'label' => 'label.email',
+                'required' => true,
+                'attr' => ['max_length' => 180],
+            ]);
+        $builder->add(
+            'password',
+            PasswordType::class,
+            [
+                'label' => 'label.password',
+                'required' => true,
+                'attr' => ['max_length' => 180],
             ]);
     }
 
@@ -46,7 +64,7 @@ class CategoryType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Category::class]);
+        $resolver->setDefaults(['data_class' => User::class]);
     }
 
     /**
@@ -59,6 +77,6 @@ class CategoryType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'category';
+        return 'user';
     }
 }
