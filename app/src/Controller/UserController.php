@@ -1,5 +1,9 @@
 <?php
 /**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
+/**
  * User controller.
  */
 
@@ -8,7 +12,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\Type\UserType;
 use App\Service\UserServiceInterface;
-use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -31,13 +34,15 @@ class UserController extends AbstractController
 
     /**
      * Translator.
-     *
-     * @var TranslatorInterface
      */
     private TranslatorInterface $translator;
 
+
     /**
      * Constructor.
+     *
+     * @param UserServiceInterface $userService
+     * @param TranslatorInterface  $translator
      */
     public function __construct(UserServiceInterface $userService, TranslatorInterface $translator)
     {
@@ -62,11 +67,13 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', ['pagination' => $pagination]);
     }
 
+
     /**
      * Show action.
      *
      * @param User $user
-     * @return Response HTTP response
+     *
+     * @return Response
      */
     #[Route(
         '/{id}',
@@ -120,8 +127,8 @@ class UserController extends AbstractController
     /**
      * Edit action.
      *
-     * @param Request  $request  HTTP request
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
@@ -149,8 +156,6 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_index');
         }
 
-
-
         return $this->render(
             'user/edit.html.twig',
             [
@@ -163,8 +168,8 @@ class UserController extends AbstractController
     /**
      * Delete action.
      *
-     * @param Request  $request  HTTP request
-     * @param User $user User entity
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
@@ -180,13 +185,12 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $deleted = $this->userService->delete($user);
 
-            if($deleted){
+            if ($deleted) {
                 $this->addFlash(
                     'success',
                     $this->translator->trans('message.deleted_successfully')
                 );
-
-            }else{
+            } else {
                 $this->addFlash(
                     'warning',
                     $this->translator->trans('message.not_deleted')

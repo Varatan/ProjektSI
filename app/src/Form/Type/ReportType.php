@@ -1,5 +1,9 @@
 <?php
 /**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
+/**
  * Report type.
  */
 
@@ -40,7 +44,8 @@ class ReportType extends AbstractType
                 'label' => 'label.title',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]);
+            ]
+        );
         $builder->add(
             'content',
             TextareaType::class,
@@ -48,7 +53,8 @@ class ReportType extends AbstractType
                 'label' => 'label.content',
                 'required' => true,
                 'attr' => ['max_length' => 65535],
-            ]);
+            ]
+        );
         $builder->add(
             'category',
             EntityType::class,

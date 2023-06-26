@@ -1,5 +1,9 @@
 <?php
 /**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
+/**
  * Category type.
  */
 
@@ -36,7 +40,8 @@ class CategoryType extends AbstractType
                 'label' => 'label.title',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]);
+            ]
+        );
     }
 
     /**

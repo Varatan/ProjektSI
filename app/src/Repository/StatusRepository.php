@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
 namespace App\Repository;
 
 use App\Entity\Status;
@@ -16,11 +19,24 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class StatusRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructor
+     *
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Status::class);
     }
 
+    /**
+     * Save status
+     *
+     * @param Status $entity
+     * @param bool   $flush
+     *
+     * @return void
+     */
     public function save(Status $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -30,6 +46,14 @@ class StatusRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Remove status
+     *
+     * @param Status $entity
+     * @param bool   $flush
+     *
+     * @return void
+     */
     public function remove(Status $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);

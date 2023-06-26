@@ -1,5 +1,9 @@
 <?php
 /**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
+/**
  * User type.
  */
 
@@ -38,7 +42,8 @@ class UserType extends AbstractType
                 'label' => 'label.username',
                 'required' => true,
                 'attr' => ['max_length' => 180],
-            ]);
+            ]
+        );
         $builder->add(
             'email',
             EmailType::class,
@@ -46,7 +51,8 @@ class UserType extends AbstractType
                 'label' => 'label.email',
                 'required' => true,
                 'attr' => ['max_length' => 180],
-            ]);
+            ]
+        );
         $builder->add(
             'password',
             PasswordType::class,
@@ -54,7 +60,8 @@ class UserType extends AbstractType
                 'label' => 'label.password',
                 'required' => true,
                 'attr' => ['max_length' => 180],
-            ]);
+            ]
+        );
     }
 
     /**

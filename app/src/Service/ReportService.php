@@ -1,5 +1,9 @@
 <?php
 /**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
+/**
  * Report service.
  */
 
@@ -34,13 +38,16 @@ class ReportService implements ReportServiceInterface
      */
     private PaginatorInterface $paginator;
 
+
     /**
-     * Constructor.
+     * Constructor
      *
-     * @param ReportRepository     $reportRepository Report repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param ReportRepository         $reportRepository
+     * @param PaginatorInterface       $paginator
+     * @param Security                 $security
+     * @param CategoryServiceInterface $categoryService
      */
-    public function __construct(ReportRepository $reportRepository, PaginatorInterface $paginator, Security $security, CategoryServiceInterface $categoryService,)
+    public function __construct(ReportRepository $reportRepository, PaginatorInterface $paginator, Security $security, CategoryServiceInterface $categoryService)
     {
         $this->reportRepository = $reportRepository;
         $this->paginator = $paginator;
@@ -49,50 +56,30 @@ class ReportService implements ReportServiceInterface
     }
 
     /**
-     * Prepare filters for the tasks list.
+     * Get paginated report list
      *
-     * @param array<string, int> $filters Raw filters from request
+     * @param int   $page
+     * @param User  $author
+     * @param array $filters
      *
-     * @return array<string, object> Result array of filters
-     */
-    private function prepareFilters(array $filters): array
-    {
-        $resultFilters = [];
-        if (!empty($filters['category_id'])) {
-            $category = $this->categoryService->findOneById($filters['category_id']);
-            if (null !== $category) {
-                $resultFilters['category'] = $category;
-            }
-        }
-
-        return $resultFilters;
-    }
-
-    /**
-     * Get paginated list.
-     *
-     * @param int  $page   Page number
-     * @param User $author Author
-     *
-     * @return PaginationInterface<string, mixed> Paginated list
+     * @return PaginationInterface
      */
     public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
     {
         $filters = $this->prepareFilters($filters);
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return $this->paginator->paginate(
-              $this->reportRepository->queryAll($filters),
-              $page,
-                ReportRepository::PAGINATOR_ITEMS_PER_PAGE
-            );
-        }else{
-            return $this->paginator->paginate(
-                $this->reportRepository->queryByAuthor($author,$filters),
+                $this->reportRepository->queryAll($filters),
                 $page,
                 ReportRepository::PAGINATOR_ITEMS_PER_PAGE
             );
         }
 
+        return $this->paginator->paginate(
+            $this->reportRepository->queryByAuthor($author, $filters),
+            $page,
+            ReportRepository::PAGINATOR_ITEMS_PER_PAGE
+        );
     }
 
     /**
@@ -113,5 +100,25 @@ class ReportService implements ReportServiceInterface
     public function delete(Report $report): void
     {
         $this->reportRepository->delete($report);
+    }
+
+    /**
+     * Prepare filters for the tasks list.
+     *
+     * @param array<string, int> $filters Raw filters from request
+     *
+     * @return array<string, object> Result array of filters
+     */
+    private function prepareFilters(array $filters): array
+    {
+        $resultFilters = [];
+        if (!empty($filters['category_id'])) {
+            $category = $this->categoryService->findOneById($filters['category_id']);
+            if (null !== $category) {
+                $resultFilters['category'] = $category;
+            }
+        }
+
+        return $resultFilters;
     }
 }

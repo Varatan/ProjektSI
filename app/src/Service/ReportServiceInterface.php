@@ -1,5 +1,9 @@
 <?php
 /**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
+/**
  * Report service interface.
  */
 
@@ -14,12 +18,14 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
  */
 interface ReportServiceInterface
 {
+
     /**
-     * Get paginated list.
+     * Get paginated report list
      *
-     * @param int $page Page number
+     * @param int  $page
+     * @param User $author
      *
-     * @return PaginationInterface<string, mixed> Paginated list
+     * @return PaginationInterface
      */
     public function getPaginatedList(int $page, User $author): PaginationInterface;
 
@@ -36,5 +42,4 @@ interface ReportServiceInterface
      * @param Report $report Task entity
      */
     public function delete(Report $report): void;
-
 }

@@ -8,10 +8,7 @@ namespace App\Controller;
 use App\Entity\Report;
 use App\Entity\User;
 use App\Form\Type\ReportType;
-use App\Repository\ReportRepository;
-use App\Service\ReportService;
 use App\Service\ReportServiceInterface;
-use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -27,17 +24,21 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ReportController extends AbstractController
 {
     /**
-     * Report service.
+     *Interface ReportService.
      */
     private ReportServiceInterface $reportService;
 
     /**
-     * Translator.
+     *Interface Translator.
      */
     private TranslatorInterface $translator;
 
+
     /**
-     * Constructor.
+     * Constructor
+     *
+     * @param ReportServiceInterface $reportService
+     * @param TranslatorInterface    $translator
      */
     public function __construct(ReportServiceInterface $reportService, TranslatorInterface $translator)
     {
@@ -96,7 +97,7 @@ class ReportController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'report_create', methods: 'GET|POST', )]
+    #[Route('/create', name: 'report_create', methods: 'GET|POST')]
     public function create(Request $request): Response
     {
         /** @var User $user */
@@ -121,14 +122,14 @@ class ReportController extends AbstractController
             return $this->redirectToRoute('report_index');
         }
 
-        return $this->render('report/create.html.twig',  ['form' => $form->createView()]);
+        return $this->render('report/create.html.twig', ['form' => $form->createView()]);
     }
 
     /**
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Report $report Report entity
+     * @param Report  $report  Report entity
      *
      * @return Response HTTP response
      */
@@ -165,11 +166,12 @@ class ReportController extends AbstractController
             ]
         );
     }
+
     /**
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Report $report Report entity
+     * @param Report  $report  Report entity
      *
      * @return Response HTTP response
      */

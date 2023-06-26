@@ -1,5 +1,9 @@
 <?php
 /**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
+/**
  * Category controller.
  */
 
@@ -8,7 +12,6 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\Type\CategoryType;
 use App\Service\CategoryServiceInterface;
-use App\Repository\CategoryRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -31,13 +34,15 @@ class CategoryController extends AbstractController
 
     /**
      * Translator.
-     *
-     * @var TranslatorInterface
      */
     private TranslatorInterface $translator;
 
+
     /**
-     * Constructor.
+     * Constructor
+     *
+     * @param CategoryServiceInterface $categoryService
+     * @param TranslatorInterface      $translator
      */
     public function __construct(CategoryServiceInterface $categoryService, TranslatorInterface $translator)
     {
@@ -53,7 +58,6 @@ class CategoryController extends AbstractController
      * @return Response HTTP response
      */
     #[Route(name: 'category_index', methods: 'GET')]
-    //#[IsGranted('MANAGE')]
     public function index(Request $request): Response
     {
         $pagination = $this->categoryService->getPaginatedList(
@@ -63,11 +67,13 @@ class CategoryController extends AbstractController
         return $this->render('category/index.html.twig', ['pagination' => $pagination]);
     }
 
+
     /**
      * Show action.
      *
      * @param Category $category
-     * @return Response HTTP response
+     *
+     * @return Response
      */
     #[Route(
         '/{id}',
@@ -75,7 +81,6 @@ class CategoryController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET'
     )]
-    //#[IsGranted('VIEW', subject: 'category')]
     public function show(Category $category): Response
     {
         return $this->render(
@@ -96,7 +101,6 @@ class CategoryController extends AbstractController
         name: 'category_create',
         methods: 'GET|POST',
     )]
-    //#[IsGranted('MANAGE')]
     public function create(Request $request): Response
     {
         $category = new Category();
@@ -129,7 +133,6 @@ class CategoryController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'category_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
-    //#[IsGranted('EDIT', subject: 'category')]
     public function edit(Request $request, Category $category): Response
     {
         $form = $this->createForm(
@@ -153,8 +156,6 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('category_index');
         }
 
-
-
         return $this->render(
             'category/edit.html.twig',
             [
@@ -173,7 +174,6 @@ class CategoryController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'category_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    //#[IsGranted('DELETE', subject: 'category')]
     public function delete(Request $request, Category $category): Response
     {
         $form = $this->createForm(FormType::class, $category, [
@@ -185,13 +185,12 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $deleted = $this->categoryService->delete($category);
 
-            if($deleted){
+            if ($deleted) {
                 $this->addFlash(
                     'success',
                     $this->translator->trans('message.deleted_successfully')
                 );
-
-            }else{
+            } else {
                 $this->addFlash(
                     'warning',
                     $this->translator->trans('message.not_deleted')

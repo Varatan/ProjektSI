@@ -1,17 +1,18 @@
 <?php
 /**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
+/**
  * Report fixtures.
  */
 
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Enum\ReportStatus;
 use App\Entity\Status;
-use App\Entity\Tag;
 use App\Entity\Report;
 use App\Entity\User;
-use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -37,12 +38,12 @@ class ReportFixtures extends AbstractBaseFixtures implements DependentFixtureInt
             $report->setTitle($this->faker->sentence);
             $report->setContent($this->faker->sentence);
             $report->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             $report->setUpdatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
@@ -50,7 +51,6 @@ class ReportFixtures extends AbstractBaseFixtures implements DependentFixtureInt
             /** @var Status $status */
             $status = $this->getRandomReference('statuses');
             $report->setStatus($status);
-
 
             /** @var Category $category */
             $category = $this->getRandomReference('categories');

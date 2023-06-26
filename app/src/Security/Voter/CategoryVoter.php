@@ -1,5 +1,9 @@
 <?php
 /**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
+/**
  * Category voter.
  */
 
@@ -24,8 +28,6 @@ class CategoryVoter extends Voter
 
     /**
      * Security helper.
-     *
-     * @var Security
      */
     private Security $security;
 
@@ -49,7 +51,7 @@ class CategoryVoter extends Voter
      */
     protected function supports(string $attribute, $subject): bool
     {
-        return $attribute === self::MANAGE;
+        return self::MANAGE === $attribute;
     }
 
     /**
@@ -69,7 +71,7 @@ class CategoryVoter extends Voter
             return false;
         }
 
-        if ($attribute === self::MANAGE) {
+        if (self::MANAGE === $attribute) {
             return $this->canManage();
         }
 
@@ -81,10 +83,8 @@ class CategoryVoter extends Voter
      *
      * @return bool Result
      */
-
     private function canManage(): bool
     {
         return $this->security->isGranted('ROLE_ADMIN');
     }
-
 }

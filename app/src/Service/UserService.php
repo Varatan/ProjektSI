@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
 namespace App\Service;
 
 use App\Entity\User;
@@ -11,11 +14,10 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * User Service
+ * User Service.
  */
 class UserService implements UserServiceInterface
 {
-
     private UserRepository $userRepository;
 
     private ReportRepository $reportRepository;
@@ -26,8 +28,11 @@ class UserService implements UserServiceInterface
     private PaginatorInterface $paginator;
 
     /**
-     * @param UserRepository $userRepository
+     * Constructor
+     *
+     * @param UserRepository     $userRepository
      * @param PaginatorInterface $paginator
+     * @param ReportRepository   $reportRepository
      */
     public function __construct(UserRepository $userRepository, PaginatorInterface $paginator, ReportRepository $reportRepository)
     {
@@ -37,7 +42,10 @@ class UserService implements UserServiceInterface
     }
 
     /**
+     * Save user
+     *
      * @param User $user
+     *
      * @return void
      */
     public function save(User $user): void
@@ -46,7 +54,10 @@ class UserService implements UserServiceInterface
     }
 
     /**
+     * Create user
+     *
      * @param User $user
+     *
      * @return void
      */
     public function create(User $user): void
@@ -55,28 +66,38 @@ class UserService implements UserServiceInterface
     }
 
     /**
+     * Delete user
+     *
      * @param User $user
+     *
      * @return bool
      */
     public function delete(User $user): bool
     {
-/*        $this->userRepository->remove($user);
-        return true;*/
-        if($this->canBeDeleted($user)){
+        /*        $this->userRepository->remove($user);
+                return true;*/
+        if ($this->canBeDeleted($user)) {
             $this->userRepository->remove($user);
+
             return true;
-        }else{
-            return false;
         }
+
+        return false;
     }
 
-    /**
 
-    Can User be deleted?*
-    @param Category $category Category entity*
-    @return bool Result*/
-    public function canBeDeleted(User $user): bool{
-        try {$result = $this->reportRepository->countByUser($user);
+    /**
+     * Can user be deleted?
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function canBeDeleted(User $user): bool
+    {
+        try {
+            $result = $this->reportRepository->countByUser($user);
+
             return !($result > 0);
         } catch (NoResultException|NonUniqueResultException) {
             return false;
@@ -105,7 +126,6 @@ class UserService implements UserServiceInterface
      * @param int $id User id
      *
      * @return User|null User entity
-     *
      */
     public function findOneById(int $id): ?User
     {

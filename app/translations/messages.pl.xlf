@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="label.actions">
         <source>label.actions</source>
-        <target>Actions</target>
+        <target>Akcje</target>
       </trans-unit>
       <trans-unit id="label.id">
         <source>label.id</source>
@@ -12,11 +12,11 @@
       </trans-unit>
       <trans-unit id="label.created_at">
          <source>label.created_at</source>
-         <target>Created at</target>
+         <target>Data utworzenia</target>
       </trans-unit>
       <trans-unit id="label.updated_at">
          <source>label.updated_at</source>
-         <target>Updated at</target>
+         <target>Data modyfikacji</target>
       </trans-unit>
       <trans-unit id="label.title">
         <source>label.title</source>
@@ -24,11 +24,11 @@
       </trans-unit>
       <trans-unit id="label.content">
         <source>label.content</source>
-        <target>Content</target>
+        <target>Zawartość</target>
       </trans-unit>
       <trans-unit id="label.tags">
         <source>label.tags</source>
-        <target>Tags</target>
+        <target>Tagi</target>
       </trans-unit>
       <trans-unit id="label.category">
         <source>label.category</source>
@@ -36,19 +36,19 @@
       </trans-unit>
       <trans-unit id="message.empty_list">
         <source>message.empty_list</source>
-        <target>List is empty.</target>
+        <target>Lista jest pusta.</target>
       </trans-unit>
       <trans-unit id="message.record_not_found">
         <source>message.record_not_found</source>
-        <target>Record not found.</target>
+        <target>Rekord nie znaleziony.</target>
       </trans-unit>
       <trans-unit id="title.report_list">
         <source>title.report_list</source>
-        <target>Report list</target>
+        <target>Lista zgłoszeń</target>
       </trans-unit>
       <trans-unit id="title.report_details">
         <source>title.report_details</source>
-        <target>Report details #%id%</target>
+        <target>Szczegóły zgłoszenia #%id%</target>
       </trans-unit>
       <trans-unit id="action.show">
         <source>action.show</source>
@@ -64,7 +64,115 @@
       </trans-unit>
       <trans-unit id="action.back_to_list">
         <source>action.back_to_list</source>
-        <target>Back to list</target>
+        <target>Wróć do listy</target>
+      </trans-unit>
+      <trans-unit id="nav_reports">
+        <source>nav_reports</source>
+        <target>Zgłoszenia</target>
+      </trans-unit>
+      <trans-unit id="nav_categories">
+        <source>nav_categories</source>
+        <target>Kategorie</target>
+      </trans-unit>
+      <trans-unit id="nav_users">
+        <source>nav_users</source>
+        <target>Użytkownicy</target>
+      </trans-unit>
+      <trans-unit id="nav_index">
+        <source>nav_index</source>
+        <target>Indeks</target>
+      </trans-unit>
+      <trans-unit id="nav_create">
+        <source>nav_create</source>
+        <target>Utwórz</target>
+      </trans-unit>
+      <trans-unit id="action_logout">
+        <source>action_logout</source>
+        <target>Wyloguj się</target>
+      </trans-unit>
+      <trans-unit id="label.status">
+        <source>label.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="label.author">
+        <source>label.author</source>
+        <target>Autor</target>
+      </trans-unit>
+      <trans-unit id="action.save">
+        <source>action.save</source>
+        <target>Potwierdź</target>
+      </trans-unit>
+      <trans-unit id="label.none">
+        <source>label.none</source>
+        <target>Wybierz</target>
+      </trans-unit>
+      <trans-unit id="title.report_create">
+        <source>title.report_create</source>
+        <target>Utwórz zgłoszenie</target>
+      </trans-unit>
+      <trans-unit id="title.report_edit">
+        <source>title.report_edit</source>
+        <target>Edycja zgłoszenia #%id%</target>
+      </trans-unit>
+      <trans-unit id="title.report_delete">
+        <source>title.report_delete</source>
+        <target>Usuwanie zgłoszenia</target>
+      </trans-unit>
+      <trans-unit id="title.category_create">
+        <source>title.category_create</source>
+        <target>Utwórz kategorię</target>
+      </trans-unit>
+      <trans-unit id="title.category_details">
+        <source>title.category_details</source>
+        <target>Szczegóły kategorii #%id%</target>
+      </trans-unit>
+      <trans-unit id="title.category_edit">
+        <source>title.category_edit</source>
+        <target>Edycja kategorii #%id%</target>
+      </trans-unit>
+      <trans-unit id="title.category_delete">
+        <source>title.category_delete</source>
+        <target>Usuwanie kategorii</target>
+      </trans-unit>
+      <trans-unit id="label.username">
+        <source>label.username</source>
+        <target>Nazwa użytkownika</target>
+      </trans-unit>
+      <trans-unit id="label.email">
+        <source>label.email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="label.password">
+        <source>label.password</source>
+        <target>Hasło</target>
+      </trans-unit>
+      <trans-unit id="title.user_details">
+        <source>title.user_details</source>
+        <target>Szczegóły użytkownika #%id%</target>
+      </trans-unit>
+      <trans-unit id="title.user_edit">
+        <source>title.user_edit</source>
+        <target>Edycja użytkownika</target>
+      </trans-unit>
+      <trans-unit id="title.user_delete">
+        <source>title.user_delete</source>
+        <target>Usuwanie użytkownika</target>
+      </trans-unit>
+      <trans-unit id="message.created_successfully">
+        <source>message.created_successfully</source>
+        <target>Utworzenie zakończone powodzeniem</target>
+      </trans-unit>
+      <trans-unit id="message.edited_successfully">
+        <source>message.edited_successfully</source>
+        <target>Edycja zakończona powodzeniem</target>
+      </trans-unit>
+      <trans-unit id="message.deleted_successfully">
+        <source>message.deleted_successfully</source>
+        <target>Usuwanie zakończone powodzeniem</target>
+      </trans-unit>
+      <trans-unit id="message.not_deleted">
+        <source>message.not_deleted</source>
+        <target>Rekord nie został usunięty</target>
       </trans-unit>
     </body>
   </file>

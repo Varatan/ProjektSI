@@ -1,5 +1,9 @@
 <?php
 /**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
+/**
  * Report repository.
  */
 
@@ -49,21 +53,25 @@ class ReportRepository extends ServiceEntityRepository
         parent::__construct($registry, Report::class);
     }
 
+
     /**
-     * Query all records.
+     * Query all records
      *
-     * @return QueryBuilder Query builder
+     * @param array $filters
+     *
+     * @return QueryBuilder
      */
     public function queryAll(array $filters): QueryBuilder
     {
-        $queryBuilder =  $this->getOrCreateQueryBuilder()
+        $queryBuilder = $this->getOrCreateQueryBuilder()
             ->select(
                 'partial report.{id, createdAt, updatedAt, title, content}',
-                'partial category.{id, title}'
+                'partial category.{id, title}',
+                'partial status.{id, title}'
             )
-            ->join('report.category','category')
+            ->join('report.category', 'category')
+            ->join('report.status', 'status')
             ->orderBy('report.createdAt', 'DESC');
-
 
         return $this->applyFiltersToList($queryBuilder, $filters);
     }
@@ -71,7 +79,7 @@ class ReportRepository extends ServiceEntityRepository
     /**
      * Query reports by author.
      *
-     * @param User $user User entity
+     * @param User                  $user    User entity
      * @param array<string, object> $filters Filters
      *
      * @return QueryBuilder Query builder
@@ -84,6 +92,72 @@ class ReportRepository extends ServiceEntityRepository
             ->setParameter('author', $user);
 
         return $queryBuilder;
+    }
+
+
+    /**
+     * Count reports by category
+     *
+     * @param Category $category
+     *
+     * @return int
+     *
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function countByCategory(Category $category): int
+    {
+        $qb = $this->getOrCreateQueryBuilder();
+
+        return $qb->select($qb->expr()->countDistinct('report.id'))
+            ->where('report.category = :category')
+            ->setParameter(':category', $category)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+
+    /**
+     * Count reports by user
+     *
+     * @param User $user
+     *
+     * @return int
+     *
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function countByUser(User $user): int
+    {
+        $qb = $this->getOrCreateQueryBuilder();
+
+        return $qb->select($qb->expr()->countDistinct('report.id'))
+            ->where('report.author = :user')
+            ->setParameter(':user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * Save entity.
+     *
+     * @param Report $report
+     */
+    public function save(Report $report): void
+    {
+        $this->_em->persist($report);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Report $report Task entity
+     */
+    public function delete(Report $report): void
+    {
+        $this->_em->remove($report);
+        $this->_em->flush();
     }
 
     /**
@@ -102,66 +176,6 @@ class ReportRepository extends ServiceEntityRepository
         }
 
         return $queryBuilder;
-    }
-
-    /**
-
-    Count reports by category.*
-    @param Category $category Category*
-    @return int Number of reports in category*
-    @throws NoResultException
-    @throws NonUniqueResultException
-     */
-    public function countByCategory(Category $category): int
-    {
-        $qb = $this->getOrCreateQueryBuilder();
-
-        return $qb->select($qb->expr()->countDistinct('report.id'))
-            ->where('report.category = :category')
-            ->setParameter(':category', $category)
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    /**
-
-    Count reports by category.*
-    @param Category $category Category*
-    @return int Number of reports in category*
-    @throws NoResultException
-    @throws NonUniqueResultException
-     */
-    public function countByUser(User $user): int
-    {
-        $qb = $this->getOrCreateQueryBuilder();
-
-        return $qb->select($qb->expr()->countDistinct('report.id'))
-            ->where('report.author = :user')
-            ->setParameter(':user', $user)
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    /**
-     * Save entity.
-     *
-     * @param Report $task Task entity
-     */
-    public function save(Report $report): void
-    {
-        $this->_em->persist($report);
-        $this->_em->flush();
-    }
-
-    /**
-     * Delete entity.
-     *
-     * @param Report $report Task entity
-     */
-    public function delete(Report $report): void
-    {
-        $this->_em->remove($report);
-        $this->_em->flush();
     }
 
     /**

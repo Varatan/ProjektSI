@@ -1,5 +1,9 @@
 <?php
 /**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
+/**
  * Report voter.
  */
 
@@ -40,8 +44,6 @@ class ReportVoter extends Voter
 
     /**
      * Security helper.
-     *
-     * @var Security
      */
     private Security $security;
 
@@ -98,55 +100,54 @@ class ReportVoter extends Voter
         return false;
     }
 
-
     /**
      * Checks if user can edit report.
      *
      * @param Report $report Report entity
-     * @param User $user User
+     * @param User   $user   User
      *
      * @return bool Result
      */
     private function canEdit(Report $report, User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }else{
-            return $report->getAuthor() === $user;
         }
+
+        return $report->getAuthor() === $user;
     }
 
     /**
      * Checks if user can view report.
      *
      * @param Report $report Report entity
-     * @param User $user User
+     * @param User   $user   User
      *
      * @return bool Result
      */
     private function canView(Report $report, User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }else{
-            return $report->getAuthor() === $user;
         }
+
+        return $report->getAuthor() === $user;
     }
 
     /**
      * Checks if user can delete report.
      *
      * @param Report $report Report entity
-     * @param User $user User
+     * @param User   $user   User
      *
      * @return bool Result
      */
     private function canDelete(Report $report, User $user): bool
     {
-        if($this->security->isGranted('ROLE_ADMIN')){
+        if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
-        }else{
-            return $report->getAuthor() === $user;
         }
+
+        return $report->getAuthor() === $user;
     }
 }

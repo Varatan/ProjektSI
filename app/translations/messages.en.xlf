@@ -58,6 +58,122 @@
         <source>action.back_to_list</source>
         <target>Back to list</target>
       </trans-unit>
+      <trans-unit id="nav_reports">
+        <source>nav_reports</source>
+        <target>Reports</target>
+      </trans-unit>
+      <trans-unit id="nav_categories">
+        <source>nav_categories</source>
+        <target>Categories</target>
+      </trans-unit>
+      <trans-unit id="nav_users">
+        <source>nav_users</source>
+        <target>Users</target>
+      </trans-unit>
+      <trans-unit id="nav_index">
+        <source>nav_index</source>
+        <target>Index</target>
+      </trans-unit>
+      <trans-unit id="nav_create">
+        <source>nav_create</source>
+        <target>Create</target>
+      </trans-unit>
+      <trans-unit id="action_logout">
+        <source>action_logout</source>
+        <target>Log out</target>
+      </trans-unit>
+      <trans-unit id="label.status">
+        <source>label.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="label.author">
+        <source>label.author</source>
+        <target>Author</target>
+      </trans-unit>
+      <trans-unit id="action.save">
+        <source>action.save</source>
+        <target>Confirm</target>
+      </trans-unit>
+      <trans-unit id="label.none">
+        <source>label.none</source>
+        <target>Choose</target>
+      </trans-unit>
+      <trans-unit id="title.report_create">
+        <source>title.report_create</source>
+        <target>Create a report</target>
+      </trans-unit>
+      <trans-unit id="title.report_edit">
+        <source>title.report_edit</source>
+        <target>Editing report #%id%</target>
+      </trans-unit>
+      <trans-unit id="title.report_delete">
+        <source>title.report_delete</source>
+        <target>Delete report</target>
+      </trans-unit>
+      <trans-unit id="title.category_create">
+        <source>title.category_create</source>
+        <target>Create a category</target>
+      </trans-unit>
+      <trans-unit id="title.category_details">
+        <source>title.category_details</source>
+        <target>Category details #%id%</target>
+      </trans-unit>
+      <trans-unit id="title.category_edit">
+        <source>title.category_edit</source>
+        <target>Editing category #%id%</target>
+      </trans-unit>
+      <trans-unit id="title.category_delete">
+        <source>title.category_delete</source>
+        <target>Removing category</target>
+      </trans-unit>
+      <trans-unit id="label.username">
+        <source>label.username</source>
+        <target>Username</target>
+      </trans-unit>
+      <trans-unit id="label.email">
+        <source>label.email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="label.password">
+        <source>label.password</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="title.user_details">
+        <source>title.user_details</source>
+        <target>User details #%id%</target>
+      </trans-unit>
+      <trans-unit id="title.user_edit">
+        <source>title.user_edit</source>
+        <target>Editing user</target>
+      </trans-unit>
+      <trans-unit id="title.user_delete">
+        <source>title.user_delete</source>
+        <target>Deleting user</target>
+      </trans-unit>
+      <trans-unit id="message.created_successfully">
+        <source>message.created_successfully</source>
+        <target>Created succesfully</target>
+      </trans-unit>
+      <trans-unit id="message.edited_successfully">
+        <source>message.edited_successfully</source>
+        <target>Edited succesfully</target>
+      </trans-unit>
+      <trans-unit id="message.deleted_successfully">
+        <source>message.deleted_successfully</source>
+        <target>Deleted succesfully</target>
+      </trans-unit>
+      <trans-unit id="message.not_deleted">
+        <source>message.not_deleted</source>
+        <target>Record not deleted</target>
+      </trans-unit>
+      <trans-unit id="action.edit">
+        <source>action.edit</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="action.delete">
+        <source>action.delete</source>
+        <target>Delete</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

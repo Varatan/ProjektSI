@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * This is the license block.
+ * It can contain licensing information, copyright notices, etc.
+ */
 namespace App\Service;
 
 use App\Entity\Category;
@@ -11,11 +14,10 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
- * Category Service
+ * Category Service.
  */
 class CategoryService implements CategoryServiceInterface
 {
-
     private CategoryRepository $categoryRepository;
     private ReportRepository $reportRepository;
 
@@ -25,11 +27,13 @@ class CategoryService implements CategoryServiceInterface
     private PaginatorInterface $paginator;
 
     /**
+     * Constructor
+     *
      * @param CategoryRepository $categoryRepository
-     * @param ReportRepository $reportRepository
+     * @param ReportRepository   $reportRepository
      * @param PaginatorInterface $paginator
      */
-    public function __construct(CategoryRepository $categoryRepository, ReportRepository $reportRepository,  PaginatorInterface $paginator)
+    public function __construct(CategoryRepository $categoryRepository, ReportRepository $reportRepository, PaginatorInterface $paginator)
     {
         $this->categoryRepository = $categoryRepository;
         $this->reportRepository = $reportRepository;
@@ -37,12 +41,15 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
+     * Save category
+     *
      * @param Category $category
+     *
      * @return void
      */
     public function save(Category $category): void
     {
-        if (null == $category->getId()) {
+        if (null === $category->getId()) {
             $category->setCreatedAt(new \DateTimeImmutable());
         }
         $category->setUpdatedAt(new \DateTimeImmutable());
@@ -51,26 +58,33 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
+     * Delete category
+     *
      * @param Category $category
+     *
      * @return bool
      */
     public function delete(Category $category): bool
     {
-        if($this->canBeDeleted($category)){
+        if ($this->canBeDeleted($category)) {
             $this->categoryRepository->delete($category);
+
             return true;
-        }else{
-            return false;
         }
+
+        return false;
     }
 
     /**
-
     Can Category be deleted?*
     @param Category $category Category entity*
-    @return bool Result*/
-    public function canBeDeleted(Category $category): bool{
-        try {$result = $this->reportRepository->countByCategory($category);
+
+    *    @return bool Result*/
+    public function canBeDeleted(Category $category): bool
+    {
+        try {
+            $result = $this->reportRepository->countByCategory($category);
+
             return !($result > 0);
         } catch (NoResultException|NonUniqueResultException) {
             return false;
@@ -99,7 +113,6 @@ class CategoryService implements CategoryServiceInterface
      * @param int $id Category id
      *
      * @return Category|null Category entity
-     *
      */
     public function findOneById(int $id): ?Category
     {
