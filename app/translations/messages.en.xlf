@@ -152,7 +152,7 @@
       </trans-unit>
       <trans-unit id="message.created_successfully">
         <source>message.created_successfully</source>
-        <target>Created succesfully</target>
+        <target>Action completed succesfully</target>
       </trans-unit>
       <trans-unit id="message.edited_successfully">
         <source>message.edited_successfully</source>
@@ -173,6 +173,34 @@
       <trans-unit id="action.delete">
         <source>action.delete</source>
         <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="title.user_create">
+        <source>title.user_create</source>
+        <target>Create user</target>
+      </trans-unit>
+      <trans-unit id="message.form_error">
+        <source>message.form_error</source>
+        <target>Error</target>
+      </trans-unit>
+      <trans-unit id="label.please_sign_in">
+        <source>label.please_sign_in</source>
+        <target>Please sign in</target>
+      </trans-unit>
+      <trans-unit id="label.sign_in">
+        <source>label.sign_in</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="label.log_in">
+        <source>label.log_in</source>
+        <target>Log in!</target>
+      </trans-unit>
+      <trans-unit id="action.edit_data">
+        <source>action.edit_data</source>
+        <target>Edit data</target>
+      </trans-unit>
+      <trans-unit id="action.edit_password">
+        <source>action.edit_password</source>
+        <target>Edit Password</target>
       </trans-unit>
     </body>
   </file>

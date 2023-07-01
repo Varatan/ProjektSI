@@ -160,7 +160,7 @@
       </trans-unit>
       <trans-unit id="message.created_successfully">
         <source>message.created_successfully</source>
-        <target>Utworzenie zakończone powodzeniem</target>
+        <target>Akcja zakończona powodzeniem</target>
       </trans-unit>
       <trans-unit id="message.edited_successfully">
         <source>message.edited_successfully</source>
@@ -173,6 +173,34 @@
       <trans-unit id="message.not_deleted">
         <source>message.not_deleted</source>
         <target>Rekord nie został usunięty</target>
+      </trans-unit>
+      <trans-unit id="title.user_create">
+        <source>title.user_create</source>
+        <target>Utwórz użytkownika</target>
+      </trans-unit>
+      <trans-unit id="message.form_error">
+        <source>message.form_error</source>
+        <target>Błąd</target>
+      </trans-unit>
+      <trans-unit id="label.please_sign_in">
+        <source>label.please_sign_in</source>
+        <target>Proszę się zalogować</target>
+      </trans-unit>
+      <trans-unit id="label.sign_in">
+        <source>label.sign_in</source>
+        <target>Zaloguj się</target>
+      </trans-unit>
+      <trans-unit id="label.log_in">
+        <source>label.log_in</source>
+        <target>Zaloguj się!</target>
+      </trans-unit>
+      <trans-unit id="action.edit_data">
+        <source>action.edit_data</source>
+        <target>Edytuj dane</target>
+      </trans-unit>
+      <trans-unit id="action.edit_password">
+        <source>action.edit_password</source>
+        <target>Edytuj hasło</target>
       </trans-unit>
     </body>
   </file>
