@@ -33,12 +33,11 @@ class ReportController extends AbstractController
      */
     private TranslatorInterface $translator;
 
-
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param ReportServiceInterface $reportService
-     * @param TranslatorInterface    $translator
+     * @param ReportServiceInterface $reportService Report service
+     * @param TranslatorInterface    $translator    Translator
      */
     public function __construct(ReportServiceInterface $reportService, TranslatorInterface $translator)
     {

@@ -1,0 +1,4 @@
+   1) src/Entity/Category.php (global_namespace_import)
+   2) src/Entity/Report.php (global_namespace_import)
+
+Found 2 of 34 files that can be fixed in 0.749 seconds, 18.000 MB memory used

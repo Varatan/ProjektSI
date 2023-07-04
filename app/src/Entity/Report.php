@@ -3,6 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
+
 /**
  * Report entity.
  */
@@ -18,8 +19,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Report.
- *
- * @psalm-suppress MissingConstructor
  */
 #[ORM\Entity(repositoryClass: ReportRepository::class)]
 #[ORM\Table(name: 'reports')]
@@ -64,8 +63,6 @@ class Report
 
     /**
      * Category.
-     *
-     * @var Category
      */
     #[ORM\ManyToOne(targetEntity: Category::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
@@ -96,6 +93,9 @@ class Report
     #[Assert\Type(User::class)]
     private ?User $author = null;
 
+    /**
+     * Status.
+     */
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
@@ -114,9 +114,9 @@ class Report
     /**
      * Getter for created at.
      *
-     * @return \DateTimeImmutable|null Created at
+     * @return DateTimeImmutable|null Created at
      */
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -124,9 +124,9 @@ class Report
     /**
      * Setter for created at.
      *
-     * @param \DateTimeImmutable|null $createdAt Created at
+     * @param DateTimeImmutable|null $createdAt Created at
      */
-    public function setCreatedAt(?\DateTimeImmutable $createdAt): void
+    public function setCreatedAt(?DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -134,9 +134,9 @@ class Report
     /**
      * Getter for updated at.
      *
-     * @return \DateTimeImmutable|null Updated at
+     * @return DateTimeImmutable|null Updated at
      */
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
@@ -144,9 +144,9 @@ class Report
     /**
      * Setter for updated at.
      *
-     * @param \DateTimeImmutable|null $updatedAt Updated at
+     * @param DateTimeImmutable|null $updatedAt Updated at
      */
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(?DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -172,9 +172,9 @@ class Report
     }
 
     /**
-     * Getter for category
+     * Getter for category.
      *
-     * @return Category|null
+     * @return Category|null This category
      */
     public function getCategory(): ?Category
     {
@@ -182,11 +182,11 @@ class Report
     }
 
     /**
-     * Setter for category
+     * Setter for category.
      *
-     * @param Category|null $category
+     * @param Category|null $category Category
      *
-     * @return $this
+     * @return $this Report
      */
     public function setCategory(?Category $category): self
     {
@@ -196,9 +196,9 @@ class Report
     }
 
     /**
-     * Getter for content
+     * Getter for content.
      *
-     * @return string|null
+     * @return string|null This content
      */
     public function getContent(): ?string
     {
@@ -206,11 +206,11 @@ class Report
     }
 
     /**
-     * Setter for content
+     * Setter for content.
      *
-     * @param string $content
+     * @param string $content Content
      *
-     * @return $this
+     * @return $this Report
      */
     public function setContent(string $content): self
     {
@@ -220,9 +220,9 @@ class Report
     }
 
     /**
-     * Getter for slug
+     * Getter for slug.
      *
-     * @return string|null
+     * @return string|null This slug
      */
     public function getSlug(): ?string
     {
@@ -230,11 +230,11 @@ class Report
     }
 
     /**
-     * Setter for slug
+     * Setter for slug.
      *
-     * @param string $slug
+     * @param string $slug Slug
      *
-     * @return $this
+     * @return $this Report
      */
     public function setSlug(string $slug): self
     {
@@ -244,9 +244,9 @@ class Report
     }
 
     /**
-     * Getter for author
+     * Getter for author.
      *
-     * @return User|null
+     * @return User|null Author
      */
     public function getAuthor(): ?User
     {
@@ -254,11 +254,11 @@ class Report
     }
 
     /**
-     * Setter for author
+     * Setter for author.
      *
-     * @param User|null $author
+     * @param User|null $author Author
      *
-     * @return $this
+     * @return $this Report
      */
     public function setAuthor(?User $author): self
     {
@@ -268,9 +268,9 @@ class Report
     }
 
     /**
-     * Getter for status
+     * Getter for status.
      *
-     * @return Status|null
+     * @return Status|null This status
      */
     public function getStatus(): ?Status
     {
@@ -278,11 +278,11 @@ class Report
     }
 
     /**
-     * Setter for status
+     * Setter for status.
      *
-     * @param Status|null $status
+     * @param Status|null $status Status
      *
-     * @return $this
+     * @return $this Report
      */
     public function setStatus(?Status $status): self
     {

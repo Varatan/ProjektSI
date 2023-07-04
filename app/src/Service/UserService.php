@@ -3,6 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
+
 namespace App\Service;
 
 use App\Entity\User;
@@ -28,11 +29,11 @@ class UserService implements UserServiceInterface
     private PaginatorInterface $paginator;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param UserRepository     $userRepository
-     * @param PaginatorInterface $paginator
-     * @param ReportRepository   $reportRepository
+     * @param UserRepository     $userRepository   User repository
+     * @param PaginatorInterface $paginator        Paginator
+     * @param ReportRepository   $reportRepository Report repository
      */
     public function __construct(UserRepository $userRepository, PaginatorInterface $paginator, ReportRepository $reportRepository)
     {
@@ -42,11 +43,11 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * Save user
+     * Save user.
      *
-     * @param User $user
+     * @param User $user User entity
      *
-     * @return void
+     * @return void Result
      */
     public function save(User $user): void
     {
@@ -54,11 +55,11 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * Create user
+     * Create user.
      *
-     * @param User $user
+     * @param User $user User entity
      *
-     * @return void
+     * @return void Result
      */
     public function create(User $user): void
     {
@@ -66,11 +67,11 @@ class UserService implements UserServiceInterface
     }
 
     /**
-     * Delete user
+     * Delete user.
      *
-     * @param User $user
+     * @param User $user User entity
      *
-     * @return bool
+     * @return bool Bool
      */
     public function delete(User $user): bool
     {
@@ -85,13 +86,12 @@ class UserService implements UserServiceInterface
         return false;
     }
 
-
     /**
      * Can user be deleted?
      *
-     * @param User $user
+     * @param User $user User
      *
-     * @return bool
+     * @return bool Bool
      */
     public function canBeDeleted(User $user): bool
     {

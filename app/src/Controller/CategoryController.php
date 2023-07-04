@@ -37,12 +37,11 @@ class CategoryController extends AbstractController
      */
     private TranslatorInterface $translator;
 
-
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param CategoryServiceInterface $categoryService
-     * @param TranslatorInterface      $translator
+     * @param CategoryServiceInterface $categoryService Category service
+     * @param TranslatorInterface      $translator      Translator
      */
     public function __construct(CategoryServiceInterface $categoryService, TranslatorInterface $translator)
     {
@@ -67,13 +66,12 @@ class CategoryController extends AbstractController
         return $this->render('category/index.html.twig', ['pagination' => $pagination]);
     }
 
-
     /**
      * Show action.
      *
-     * @param Category $category
+     * @param Category $category Category entity
      *
-     * @return Response
+     * @return Response Response
      */
     #[Route(
         '/{id}',

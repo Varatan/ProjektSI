@@ -18,14 +18,13 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
  */
 interface ReportServiceInterface
 {
-
     /**
-     * Get paginated report list
+     * Get paginated report list.
      *
-     * @param int  $page
-     * @param User $author
+     * @param int  $page   Page
+     * @param User $author Author
      *
-     * @return PaginationInterface
+     * @return PaginationInterface Pagination interface
      */
     public function getPaginatedList(int $page, User $author): PaginationInterface;
 

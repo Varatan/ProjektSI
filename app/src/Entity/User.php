@@ -42,8 +42,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Roles.
-     *
-     * @var array<int, string>
      */
     #[ORM\Column(type: 'json')]
     private array $roles = [];
@@ -97,7 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return string User identifier
      *
-     * @see UserInterface
+     * @see UserInterface User Interface
      */
     public function getUserIdentifier(): string
     {
@@ -105,9 +103,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     * Get user username.
      *
-     * @return string Username
+     * @return string User username
      */
     public function getUsername(): string
     {
@@ -119,7 +117,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return array<int, string> Roles
      *
-     * @see UserInterface
+     * @see UserInterface User Interface
      */
     public function getRoles(): array
     {
@@ -145,7 +143,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return string|null Password
      *
-     * @see PasswordAuthenticatedUserInterface
+     * @see PasswordAuthenticatedUserInterface Password Authenticated User Interface
      */
     public function getPassword(): ?string
     {
@@ -176,9 +174,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *
-     * @return string|null
+     * @see UserInterface User interface
      *
-     * @see UserInterface
+     * @return string|null null
      */
     public function getSalt(): ?string
     {
@@ -188,7 +186,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Removes sensitive information from the token.
      *
-     * @see UserInterface
+     * @see UserInterface User interface
      */
     public function eraseCredentials(): void
     {

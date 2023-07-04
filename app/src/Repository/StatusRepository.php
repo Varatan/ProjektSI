@@ -3,6 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
+
 namespace App\Repository;
 
 use App\Entity\Status;
@@ -20,9 +21,9 @@ use Doctrine\Persistence\ManagerRegistry;
 class StatusRepository extends ServiceEntityRepository
 {
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param ManagerRegistry $registry
+     * @param ManagerRegistry $registry Registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -30,12 +31,12 @@ class StatusRepository extends ServiceEntityRepository
     }
 
     /**
-     * Save status
+     * Save status.
      *
-     * @param Status $entity
-     * @param bool   $flush
+     * @param Status $entity Status
+     * @param bool   $flush  Flush bool
      *
-     * @return void
+     * @return void Result
      */
     public function save(Status $entity, bool $flush = false): void
     {
@@ -47,12 +48,12 @@ class StatusRepository extends ServiceEntityRepository
     }
 
     /**
-     * Remove status
+     * Remove status.
      *
-     * @param Status $entity
-     * @param bool   $flush
+     * @param Status $entity Status
+     * @param bool   $flush  Flush bool
      *
-     * @return void
+     * @return void Result
      */
     public function remove(Status $entity, bool $flush = false): void
     {
@@ -62,29 +63,4 @@ class StatusRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-//    /**
-//     * @return Status[] Returns an array of Status objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Status
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

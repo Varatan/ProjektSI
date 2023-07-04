@@ -3,6 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
+
 namespace App\Repository;
 
 use App\Entity\User;
@@ -37,10 +38,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public const PAGINATOR_ITEMS_PER_PAGE = 10;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param ManagerRegistry             $registry
-     * @param UserPasswordHasherInterface $passwordHasher
+     * @param ManagerRegistry             $registry       Manager Registry
+     * @param UserPasswordHasherInterface $passwordHasher User Password Hasher Interface
      */
     public function __construct(ManagerRegistry $registry, UserPasswordHasherInterface $passwordHasher)
     {
@@ -49,11 +50,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Save user
+     * Save user.
      *
-     * @param User $entity
+     * @param User $entity User entity
      *
-     * @return void
+     * @return void Result
      */
     public function save(User $entity): void
     {
@@ -64,11 +65,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Create user
+     * Create user.
      *
-     * @param User $entity
+     * @param User $entity User entity
      *
-     * @return void
+     * @return void Result
      */
     public function create(User $entity): void
     {
@@ -80,11 +81,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
-     * Remove user
+     * Remove user.
      *
-     * @param User $entity
+     * @param User $entity User entity
      *
-     * @return void
+     * @return void Result
      */
     public function remove(User $entity): void
     {
@@ -92,14 +93,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
-
     /**
-     * Upgrade password function
+     * Upgrade password function.
      *
-     * @param PasswordAuthenticatedUserInterface $user
-     * @param string                             $newHashedPassword
+     * @param PasswordAuthenticatedUserInterface $user              User entity
+     * @param string                             $newHashedPassword Hashed password
      *
-     * @return void
+     * @return void Result
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
@@ -115,7 +115,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Query all users.
      *
-     * @return QueryBuilder
+     * @return QueryBuilder Query builder
      */
     public function queryAll(): QueryBuilder
     {
@@ -135,29 +135,4 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         return $queryBuilder ?? $this->createQueryBuilder('user');
     }
-
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?User
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

@@ -3,6 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
+
 namespace App\Service;
 
 use App\Entity\Category;
@@ -13,31 +14,31 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
  */
 interface CategoryServiceInterface
 {
-
     /**
-     * Save category
+     * Save category.
      *
-     * @param Category $category
+     * @param Category $category Category
      *
-     * @return void
+     * @return void Result
      */
     public function save(Category $category): void;
 
-
     /**
-     * Delete category
+     * Delete category.
      *
-     * @param Category $category
+     * @param Category $category Category
      *
-     * @return bool
+     * @return bool Bool result
      */
     public function delete(Category $category): bool;
 
     /**
-    Can Category be deleted?*
-    @param Category $category Category entity*
-
-    *    @return bool Result*/
+     * Can Category be deleted?
+     *
+     * @param Category $category Category entity
+     *
+     * @return bool Result
+     */
     public function canBeDeleted(Category $category): bool;
 
     /**
@@ -50,11 +51,11 @@ interface CategoryServiceInterface
     public function getPaginatedList(int $page): PaginationInterface;
 
     /**
-     * Find category by ID
+     * Find category by ID.
      *
-     * @param int $id
+     * @param int $id Id
      *
-     * @return Category|null
+     * @return Category|null Category
      */
     public function findOneById(int $id): ?Category;
 }

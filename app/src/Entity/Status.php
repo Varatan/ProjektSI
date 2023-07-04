@@ -3,6 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
+
 namespace App\Entity;
 
 use App\Repository\StatusRepository;
@@ -11,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Status
+ * Class Status.
  */
 #[ORM\Entity(repositoryClass: StatusRepository::class)]
 #[ORM\Table(name: 'statuses')]
@@ -19,11 +20,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['title'])]
 class Status
 {
+    /**
+     * Id.
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * Title.
+     */
     #[ORM\Column(length: 255)]
     #[Assert\Type('string')]
     #[Assert\NotBlank]
@@ -31,9 +38,9 @@ class Status
     private ?string $title = null;
 
     /**
-     * Getter for id
+     * Getter for id.
      *
-     * @return int|null
+     * @return int|null This id
      */
     public function getId(): ?int
     {
@@ -41,9 +48,9 @@ class Status
     }
 
     /**
-     * Getter for title
+     * Getter for title.
      *
-     * @return string|null
+     * @return string|null This title
      */
     public function getTitle(): ?string
     {
@@ -51,11 +58,11 @@ class Status
     }
 
     /**
-     * Setter for title
+     * Setter for title.
      *
-     * @param string $title
+     * @param string $title Title
      *
-     * @return $this
+     * @return $this Status
      */
     public function setTitle(string $title): self
     {

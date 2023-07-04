@@ -3,6 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
+
 /**
  * Report repository.
  */
@@ -53,13 +54,12 @@ class ReportRepository extends ServiceEntityRepository
         parent::__construct($registry, Report::class);
     }
 
-
     /**
-     * Query all records
+     * Query all records.
      *
-     * @param array $filters
+     * @param array $filters Filter array
      *
-     * @return QueryBuilder
+     * @return QueryBuilder Query builder
      */
     public function queryAll(array $filters): QueryBuilder
     {
@@ -94,16 +94,15 @@ class ReportRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
-
     /**
-     * Count reports by category
+     * Count reports by category.
      *
-     * @param Category $category
+     * @param Category $category Report category
      *
-     * @return int
+     * @return int Result
      *
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * @throws NoResultException        No result exception
+     * @throws NonUniqueResultException Non unique result exception
      */
     public function countByCategory(Category $category): int
     {
@@ -116,16 +115,15 @@ class ReportRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-
     /**
-     * Count reports by user
+     * Count reports by user.
      *
-     * @param User $user
+     * @param User $user User entity
      *
-     * @return int
+     * @return int Result
      *
-     * @throws NoResultException
-     * @throws NonUniqueResultException
+     * @throws NoResultException        No Result Exception
+     * @throws NonUniqueResultException Non unique Result Excpetion
      */
     public function countByUser(User $user): int
     {
@@ -141,7 +139,9 @@ class ReportRepository extends ServiceEntityRepository
     /**
      * Save entity.
      *
-     * @param Report $report
+     * @param Report $report Report entity
+     *
+     * @return void Result
      */
     public function save(Report $report): void
     {

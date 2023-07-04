@@ -3,6 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
+
 namespace App\Service;
 
 use App\Entity\Category;
@@ -27,11 +28,11 @@ class CategoryService implements CategoryServiceInterface
     private PaginatorInterface $paginator;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param CategoryRepository $categoryRepository
-     * @param ReportRepository   $reportRepository
-     * @param PaginatorInterface $paginator
+     * @param CategoryRepository $categoryRepository Category repository
+     * @param ReportRepository   $reportRepository   Report
+     * @param PaginatorInterface $paginator          Paginator
      */
     public function __construct(CategoryRepository $categoryRepository, ReportRepository $reportRepository, PaginatorInterface $paginator)
     {
@@ -41,11 +42,11 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
-     * Save category
+     * Save category.
      *
-     * @param Category $category
+     * @param Category $category Category
      *
-     * @return void
+     * @return void Result
      */
     public function save(Category $category): void
     {
@@ -58,11 +59,11 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
-     * Delete category
+     * Delete category.
      *
-     * @param Category $category
+     * @param Category $category Category
      *
-     * @return bool
+     * @return bool Bool
      */
     public function delete(Category $category): bool
     {
@@ -76,10 +77,12 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
-    Can Category be deleted?*
-    @param Category $category Category entity*
-
-    *    @return bool Result*/
+     * Can Category be deleted?*.
+     *
+     * @param Category $category Category entity
+     *
+     * @return bool Result
+     */
     public function canBeDeleted(Category $category): bool
     {
         try {

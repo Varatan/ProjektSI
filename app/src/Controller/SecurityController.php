@@ -3,10 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
-/**
- * This is the license block.
- * It can contain licensing information, copyright notices, etc.
- */
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,9 +19,9 @@ class SecurityController extends AbstractController
     /**
      * Login function.
      *
-     * @param AuthenticationUtils $authenticationUtils
+     * @param AuthenticationUtils $authenticationUtils Authentication utils
      *
-     * @return Response
+     * @return Response Response
      */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
@@ -43,8 +40,6 @@ class SecurityController extends AbstractController
 
     /**
      * Logout function.
-     *
-     * @return void
      */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void

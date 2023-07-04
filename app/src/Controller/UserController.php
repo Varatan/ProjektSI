@@ -3,6 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
+
 /**
  * User controller.
  */
@@ -38,12 +39,11 @@ class UserController extends AbstractController
      */
     private TranslatorInterface $translator;
 
-
     /**
      * Constructor.
      *
-     * @param UserServiceInterface $userService
-     * @param TranslatorInterface  $translator
+     * @param UserServiceInterface $userService User service
+     * @param TranslatorInterface  $translator  Translator
      */
     public function __construct(UserServiceInterface $userService, TranslatorInterface $translator)
     {
@@ -68,13 +68,12 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', ['pagination' => $pagination]);
     }
 
-
     /**
      * Show action.
      *
-     * @param User $user
+     * @param User $user User entity
      *
-     * @return Response
+     * @return Response Response
      */
     #[Route(
         '/{id}',

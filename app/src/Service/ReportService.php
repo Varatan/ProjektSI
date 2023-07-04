@@ -3,6 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
+
 /**
  * Report service.
  */
@@ -31,21 +32,23 @@ class ReportService implements ReportServiceInterface
      */
     private CategoryServiceInterface $categoryService;
 
-    private $security;
+    /**
+     * Security.
+     */
+    private Security $security;
 
     /**
      * Paginator.
      */
     private PaginatorInterface $paginator;
 
-
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param ReportRepository         $reportRepository
-     * @param PaginatorInterface       $paginator
-     * @param Security                 $security
-     * @param CategoryServiceInterface $categoryService
+     * @param ReportRepository         $reportRepository Report repository
+     * @param PaginatorInterface       $paginator        Paginator
+     * @param Security                 $security         Security
+     * @param CategoryServiceInterface $categoryService  Category service
      */
     public function __construct(ReportRepository $reportRepository, PaginatorInterface $paginator, Security $security, CategoryServiceInterface $categoryService)
     {
@@ -56,13 +59,13 @@ class ReportService implements ReportServiceInterface
     }
 
     /**
-     * Get paginated report list
+     * Get paginated report list.
      *
-     * @param int   $page
-     * @param User  $author
-     * @param array $filters
+     * @param int   $page    Page
+     * @param User  $author  User entity
+     * @param array $filters Filter array
      *
-     * @return PaginationInterface
+     * @return PaginationInterface Pagination interface
      */
     public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
     {
@@ -105,9 +108,9 @@ class ReportService implements ReportServiceInterface
     /**
      * Prepare filters for the tasks list.
      *
-     * @param array<string, int> $filters Raw filters from request
+     * @param array $filters Filter array
      *
-     * @return array<string, object> Result array of filters
+     * @return array Result array of filters
      */
     private function prepareFilters(array $filters): array
     {

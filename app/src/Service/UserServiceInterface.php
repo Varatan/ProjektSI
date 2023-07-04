@@ -3,6 +3,7 @@
  * This is the license block.
  * It can contain licensing information, copyright notices, etc.
  */
+
 namespace App\Service;
 
 use App\Entity\User;
@@ -13,22 +14,21 @@ use Knp\Component\Pager\Pagination\PaginationInterface;
  */
 interface UserServiceInterface
 {
-
     /**
-     * Save user
+     * Save user.
      *
-     * @param User $user
+     * @param User $user User
      *
-     * @return void
+     * @return void Result
      */
     public function save(User $user): void;
 
     /**
-     * Delete user
+     * Delete user.
      *
-     * @param User $user
+     * @param User $user User
      *
-     * @return bool
+     * @return bool Bool result
      */
     public function delete(User $user): bool;
 
@@ -41,22 +41,21 @@ interface UserServiceInterface
      */
     public function getPaginatedList(int $page): PaginationInterface;
 
-
     /**
-     * Find on by ID
+     * Find one by ID.
      *
-     * @param int $id
+     * @param int $id Id
      *
-     * @return User|null
+     * @return User|null User
      */
     public function findOneById(int $id): ?User;
 
     /**
-     * Create user
+     * Create user.
      *
-     * @param User $user
+     * @param User $user User
      *
-     * @return void
+     * @return void Bool result
      */
     public function create(User $user): void;
 }
