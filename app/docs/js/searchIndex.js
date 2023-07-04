@@ -498,7 +498,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Report\u003A\u003A\u0024status",
             "name": "status",
-            "summary": "",
+            "summary": "Status.",
             "url": "classes/App-Entity-Report.html#property_status"
         },                {
             "fqsen": "\\App\\Entity\\Status",
@@ -523,12 +523,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\Status\u003A\u003A\u0024id",
             "name": "id",
-            "summary": "",
+            "summary": "Id.",
             "url": "classes/App-Entity-Status.html#property_id"
         },                {
             "fqsen": "\\App\\Entity\\Status\u003A\u003A\u0024title",
             "name": "title",
-            "summary": "",
+            "summary": "Title.",
             "url": "classes/App-Entity-Status.html#property_title"
         },                {
             "fqsen": "\\App\\Entity\\User",
@@ -558,7 +558,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetUsername\u0028\u0029",
             "name": "getUsername",
-            "summary": "",
+            "summary": "Get\u0020user\u0020username.",
             "url": "classes/App-Entity-User.html#method_getUsername"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetRoles\u0028\u0029",
@@ -1063,7 +1063,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Service\\CategoryServiceInterface\u003A\u003AcanBeDeleted\u0028\u0029",
             "name": "canBeDeleted",
-            "summary": "Can\u0020Category\u0020be\u0020deleted\u003F\u002A.",
+            "summary": "Can\u0020Category\u0020be\u0020deleted\u003F",
             "url": "classes/App-Service-CategoryServiceInterface.html#method_canBeDeleted"
         },                {
             "fqsen": "\\App\\Service\\CategoryServiceInterface\u003A\u003AgetPaginatedList\u0028\u0029",
@@ -1118,7 +1118,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Service\\ReportService\u003A\u003A\u0024security",
             "name": "security",
-            "summary": "",
+            "summary": "Security.",
             "url": "classes/App-Service-ReportService.html#property_security"
         },                {
             "fqsen": "\\App\\Service\\ReportService\u003A\u003A\u0024paginator",
